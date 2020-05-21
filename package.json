@@ -1,30 +1,34 @@
 {
   "name": "todolist-api",
   "version": "1.0.0",
-  "description": "A simple TodoList API writen in Node with Express.js, saving to a private Mongo",
-  "main": "index.js",
+  "description": "A simple TodoList API writen in Node with Express.js and Mysql",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon --exec yarn run babel-node -- src/index.js",
     "test": "exit 0;"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BrunoDM2943/todolist-api.git"
-  },
+  "repository": "git+https://github.com/LeticiaSoares/todolist-api.git",
   "keywords": [
     "node",
     "express",
-    "mongo",
     "todo"
   ],
-  "author": "BrunoDM2943 <bdm2943@gmail.com>",
+  "author": "LeticiaSoares <lele_leticia.94@@hotmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/BrunoDM2943/todolist-api/issues"
   },
   "homepage": "https://github.com/BrunoDM2943/todolist-api#readme",
   "dependencies": {
-    "express": "^4.16.3",
-    "mongodb": "^3.1.4"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^2.0.3"
   }
 }
