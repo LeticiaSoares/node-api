@@ -5,12 +5,14 @@ function queryDB(sql, args){
         database.query(sql, args, (err, rows) => {
             if (err)
                 return reject(err);
-            rows.changedRows || rows.affectedRows || rows.insertId ? resolve(true) : resolve(rows);
+            rows || rows.changedRows || rows.affectedRows || rows.insertId ? resolve(JSON.parse(JSON.stringify(rows))) : resolve([]);
         });
     })
 }
 
 const querys ={
+    loginUser: ({email,password}) => queryDB("select * from todolist.users u where u.email = ? and u.password = ? ",[email,password]).then(data => data),
+    setSessionId : ({ session_id,id }) => queryDB("update todolist.users SET session_id = ? where id = ?", [session_id, id]).then(data => data),
     getList: () => queryDB("select * from todolist.list u"),
     getUserInfo: async ({ name }) => {
         const variable = `%${name}%`
