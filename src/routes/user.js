@@ -8,13 +8,16 @@ function setSessionId(data){
 function login(req, res) {
     try{
         const user = req.body
-        const header = req.headers
         querys.loginUser(user).then(async (data)=>{
             if(data.length >0){
                 const randomNumber=Math.random().toString();
                 const session_id =randomNumber.substring(2,randomNumber.length);
                 const result =await setSessionId({session_id : session_id, id : data[0].id})
+                console.log('data',data)
                 if(result){
+                    res.set('Authorization', 'Bearer ' + session_id);
+                    console.log('user_id',data[0].id)
+                    res.set('user_id', data[0].id);
                     return res.status(201).send({msg:"Login Efetuado com Sucesso"});
                 }else{
                     return res.status(404).send({ msg : "Not Found"})
@@ -26,18 +29,6 @@ function login(req, res) {
     }catch (e) {
         return res.status(500).send({ msg : "Internal Server Error"})
     }
-}
-
-function validUser(user, res) {
-    if (!user) {
-        res.status(400).send({msg: "user is required in header"})
-        return false;
-    }
-    return true;
-}
-
-function getUser(req) {
-    return req.get("user")
 }
 
 module.exports = {
